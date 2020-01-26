@@ -48,17 +48,24 @@ int main() {
 
 	//string Asequence[60*16];
 	vector<vector<string>> sequencesA;
-	vector<string> initial;
-	initial.assign(1, "R");
-	sequencesA.assign(1, initial);
+	vector<string> initialA;
+	initialA.assign(1, "R");
+	sequencesA.assign(1, initialA);
+
+	vector<vector<string>> sequencesB;
+	vector<string> initialB;
+	initialB.assign(1, "R");
+	sequencesB.assign(1, initialB);
 
 	for(int i=0; i<3; i++) {
 		cout << "TrackNumber: " << i << endl;
 		for(int j=0; j < midifile[i].size(); j++) {
+			
 			if (midifile[i][j].isNoteOn()) {
 				int time = midifile[i][j].tick;
 				int keynumber = midifile[i][j].getKeyNumber();
 				string pitchname = PitchName(keynumber);
+
 				if (time >= begA && time < endA) {
 					int IsAdded = 0;
 					int NumberOfRepeats = 0;
@@ -73,14 +80,51 @@ int main() {
 						if (NumberOfRepeats >= sequencesA.size()) sequencesA.resize(NumberOfRepeats + 1);
 					}
 				}
+
+				
+				if (time >= begB && time < endB) {
+					int IsAdded = 0;
+					int NumberOfRepeats = 0;
+					while (IsAdded == 0) {
+						if ( find( sequencesB[NumberOfRepeats].begin(), sequencesB[NumberOfRepeats].end(), pitchname) != sequencesB[NumberOfRepeats].end()) {
+							NumberOfRepeats++;
+						}
+						else {
+							sequencesB[NumberOfRepeats].push_back(pitchname);
+							IsAdded = 1;
+						}
+						if (NumberOfRepeats >= sequencesB.size()) sequencesB.resize(NumberOfRepeats + 1);
+					}
+				}
+			
 			}
+
 		}
+
+		cout << "For fragment A:" << endl;
+
 		for (int i=0; i < sequencesA.size(); i++) {
 			for (int j=0; j < sequencesA[i].size(); j++) {
-				cout << sequencesA[i][j] << " ";
+				if (sequencesA[i][j] != "R") cout << sequencesA[i][j] << " ";
 			}
 			cout << endl;
 		}
+		
+		cout << "For fragment B:" << endl;
+
+		for (int i=0; i < sequencesB.size(); i++) {
+			for (int j=0; j < sequencesB[i].size(); j++) {
+				if (sequencesB[i][j] != "R") cout << sequencesB[i][j] << " ";
+			}
+			cout << endl;
+		}
+
+		initialA.assign(1, "R");
+		sequencesA.assign(1, initialA);
+		
+		initialB.assign(1, "R");
+		sequencesB.assign(1, initialB);
+
 		cout << endl;
 	}
 	return 0;
