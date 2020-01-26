@@ -1,0 +1,1 @@
+g++ test.cpp Binasc.cpp MidiEvent.cpp MidiEventList.cpp MidiFile.cpp MidiMessage.cpp Options.cpp 
