@@ -9,7 +9,7 @@ jobs:
                         - name: CloneRepository
                           run: git clone https://github.com/Trzyszcz/Fountain.git
                         - name: ChangeDirectory
-                          run: cd Fountain
+                          run: cd Fountain/Fountain
                         - name: DebugInfo
                           run: ls -a
                         - name: BuildStuff
