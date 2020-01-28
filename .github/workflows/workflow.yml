@@ -1,0 +1,10 @@
+name: Main workflow
+on: push
+
+jobs:
+        BuildForMac:
+                name: BuildForMac
+                runs-on: macOS-10.14
+                steps:
+                        - name: BuildStuff
+                          run: g++ test.cpp Binasc.cpp MidiEvent.cpp MidiEventList.cpp MidiFile.cpp MidiMessage.cpp Options.cpp 
