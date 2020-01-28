@@ -8,5 +8,7 @@ jobs:
                 steps:
                         - name: CloneRepository
                           run: git clone https://github.com/Trzyszcz/Fountain.git
+                        - name: ChangeDirectory
+                          run: cd Fountain
                         - name: BuildStuff
                           run: g++ test.cpp Binasc.cpp MidiEvent.cpp MidiEventList.cpp MidiFile.cpp MidiMessage.cpp Options.cpp 
