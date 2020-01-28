@@ -4,7 +4,7 @@ on: push
 jobs:
         BuildForMac:
                 name: BuildForMac
-                runs-on: macOS-10.14
+                runs-on: macOS-latest
                 steps:
                         - name: CloneRepository
                           run: git clone https://github.com/Trzyszcz/Fountain.git
