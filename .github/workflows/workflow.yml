@@ -8,11 +8,11 @@ jobs:
                 steps:
                         - name: CloneRepository
                           run: git clone https://github.com/Trzyszcz/Fountain.git
-                        - name: DebugInfo1
-                          run: ls -a
-                        - name: ChangeDirectory
-                          run: cd Fountain
-                        - name: DebugInfo2
-                          run: ls -a
+                          #- name: DebugInfo1
+                          #run: ls -a
+                          #- name: ChangeDirectory
+                          #run: cd Fountain
+                          #- name: DebugInfo2
+                          #run: ls -a
                         - name: BuildStuff
-                          run: g++ test.cpp Binasc.cpp MidiEvent.cpp MidiEventList.cpp MidiFile.cpp MidiMessage.cpp Options.cpp 
+                          run: g++ Fountain/test.cpp Fountain/Binasc.cpp Fountain/MidiEvent.cpp Fountain/MidiEventList.cpp Fountain/MidiFile.cpp Fountain/MidiMessage.cpp Fountain/Options.cpp 
