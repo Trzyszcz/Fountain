@@ -6,5 +6,7 @@ jobs:
                 name: BuildForMac
                 runs-on: macOS-10.14
                 steps:
+                        - name: CloneRepository
+                          run: git clone https://github.com/Trzyszcz/Fountain.git
                         - name: BuildStuff
                           run: g++ test.cpp Binasc.cpp MidiEvent.cpp MidiEventList.cpp MidiFile.cpp MidiMessage.cpp Options.cpp 
