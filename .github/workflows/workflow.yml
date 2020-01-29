@@ -15,4 +15,4 @@ jobs:
                           #- name: DebugInfo2
                           #run: ls -a
                         - name: BuildStuff
-                          run: g++ Fountain/test.cpp Fountain/Binasc.cpp Fountain/MidiEvent.cpp Fountain/MidiEventList.cpp Fountain/MidiFile.cpp Fountain/MidiMessage.cpp Fountain/Options.cpp 
+                          run: g++ -std=gnu++1z Fountain/test.cpp Fountain/Binasc.cpp Fountain/MidiEvent.cpp Fountain/MidiEventList.cpp Fountain/MidiFile.cpp Fountain/MidiMessage.cpp Fountain/Options.cpp 
