@@ -8,11 +8,12 @@ jobs:
                 steps:
                         - name: CloneRepository
                           run: git clone https://github.com/Trzyszcz/Fountain.git
-                          #- name: DebugInfo1
-                          #run: ls -a
-                          #- name: ChangeDirectory
-                          #run: cd Fountain
-                          #- name: DebugInfo2
-                          #run: ls -a
                         - name: BuildStuff
                           run: g++ -std=gnu++1z Fountain/test.cpp Fountain/Binasc.cpp Fountain/MidiEvent.cpp Fountain/MidiEventList.cpp Fountain/MidiFile.cpp Fountain/MidiMessage.cpp Fountain/Options.cpp 
+                        - name: DebugInfo
+                          run: ls -a
+                        - name: ArchiveBinary
+                          uses: actions/upload-artifact@v1
+                          with:
+                                  name: Fountain
+                                  path: a.out
