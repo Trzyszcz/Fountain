@@ -7,7 +7,7 @@
 using namespace std;
 using namespace smf;
 
-string PitchName(int keynumber) {
+string PitchNameOctaveSensitive(int keynumber) {
 	string pitches[12] = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
         int octave = (keynumber / 12) - 1;
 	int noteIndex = (keynumber % 12);
@@ -15,6 +15,16 @@ string PitchName(int keynumber) {
 	noteName = noteName + to_string(octave);
 	return noteName;
 }
+
+string PitchNameClass(int keynumber) {
+	        string pitches[12] = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
+		//int octave = (keynumber / 12) - 1;
+		int noteIndex = (keynumber % 12);
+		string noteName = pitches[noteIndex];
+		//noteName = noteName + to_string(octave);
+		return noteName;
+}
+
 
 
 int main() {
@@ -27,6 +37,11 @@ int main() {
 	//cout << "Ticks per quarter note: " <<  midifile.getTicksPerQuarterNote() << endl << endl;
 
 	int ticksper = midifile.getTicksPerQuarterNote();
+
+	string OctAns;
+
+	cout << "Should the comparison be octave sensitive? (Y or N):" << endl;
+	cin >> OctAns;
 
 	cout << "Number of tracks: " << midifile.getTrackCount() << endl << endl;
 
@@ -72,7 +87,9 @@ int main() {
 			if (midifile[i][j].isNoteOn()) {
 				int time = midifile[i][j].tick;
 				int keynumber = midifile[i][j].getKeyNumber();
-				string pitchname = PitchName(keynumber);
+				string pitchname;
+				if (OctAns == "Y") pitchname = PitchNameOctaveSensitive(keynumber);
+				else pitchname = PitchNameClass(keynumber);
 
 				if (time >= begA && time < endA) {
 					int IsAdded = 0;
