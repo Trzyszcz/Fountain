@@ -24,27 +24,35 @@ int main() {
 		cout << "Reading file successful" << endl;
 	}
 
-	cout << "Ticks per quarter note: " <<  midifile.getTicksPerQuarterNote() << endl << endl;
+	//cout << "Ticks per quarter note: " <<  midifile.getTicksPerQuarterNote() << endl << endl;
+
+	int ticksper = midifile.getTicksPerQuarterNote();
 
 	cout << "Number of tracks: " << midifile.getTrackCount() << endl << endl;
 
-	int begA, endA, begB, endB;
+	float begA, endA, begB, endB;
 
-	cout << "Enter beginning of fragment A in ticks:" << endl;
+	cout << "Enter beginning of fragment A in quarter notes:" << endl;
 
 	cin >> begA;
+	begA = begA * ticksper;
 
-	cout << "Enter end of fragment A in ticks:" << endl;
+	cout << "Enter end of fragment A in quarter notes:" << endl;
 
 	cin >> endA;
+	endA = endA * ticksper;
 
 	cout << "Enter beginning of fragment B in ticks:" << endl;
 
 	cin >> begB;
+	begB = begB * ticksper;
 
 	cout << "Enter end of fragment B in ticks:" << endl;
 
 	cin >> endB;
+	endB = endB * ticksper;
+
+	cout << endl;
 
 	//string Asequence[60*16];
 	vector<vector<string>> sequencesA;
