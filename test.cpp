@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <iomanip>
 
 using namespace std;
 using namespace smf;
@@ -17,15 +18,42 @@ string PitchNameOctaveSensitive(int keynumber) {
 }
 
 string PitchNameClass(int keynumber) {
-	        string pitches[12] = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
-		//int octave = (keynumber / 12) - 1;
-		int noteIndex = (keynumber % 12);
-		string noteName = pitches[noteIndex];
-		//noteName = noteName + to_string(octave);
-		return noteName;
+	string pitches[12] = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
+	int noteIndex = (keynumber % 12);
+	string noteName = pitches[noteIndex];
+	return noteName;
 }
 
+string VectorToString(vector<string> VectorIn) {
+	string answer = "";
+	for(int i=0; i<VectorIn.size(); i++) {
+		answer = answer + VectorIn[i] + " ";
+	}
+	return answer;
+}
 
+vector<string> vecintersection(vector<string> vector1, vector<string> vector2) {
+	vector<string> answer;
+	for(int i=0; i<vector1.size(); i++) {
+		for(int j=0; j<vector2.size(); j++) {
+			if( (vector1[i] == vector2[j]) && (find(answer.begin(), answer.end(), vector2[j]) == answer.end()) ) {
+				answer.push_back(vector2[j]);
+			}
+		}
+	}
+	return answer;
+}
+
+vector<string> vecdifference(vector<string> vector1, vector<string> vector2) {
+	vector<string> answer;
+	vector<string> vecsum = vecintersection(vector1, vector2);
+	for(int i=0; i<vector1.size(); i++) {
+		if(find(vecsum.begin(), vecsum.end(), vector1[i]) == vecsum.end()) {
+			answer.push_back(vector1[i]);
+		}
+	}
+	return answer;
+}
 
 int main() {
 	MidiFile midifile;
@@ -33,8 +61,6 @@ int main() {
 	if ( midifile.status() ) {
 		cout << "Reading file successful" << endl;
 	}
-
-	//cout << "Ticks per quarter note: " <<  midifile.getTicksPerQuarterNote() << endl << endl;
 
 	int ticksper = midifile.getTicksPerQuarterNote();
 
@@ -57,12 +83,12 @@ int main() {
 	cin >> endA;
 	endA = endA * ticksper;
 
-	cout << "Enter beginning of fragment B in ticks:" << endl;
+	cout << "Enter beginning of fragment B in quarter notes:" << endl;
 
 	cin >> begB;
 	begB = begB * ticksper;
 
-	cout << "Enter end of fragment B in ticks:" << endl;
+	cout << "Enter end of fragment B in quarter notes:" << endl;
 
 	cin >> endB;
 	endB = endB * ticksper;
@@ -80,8 +106,13 @@ int main() {
 	initialB.assign(1, "R");
 	sequencesB.assign(1, initialB);
 
+	vector<vector<string>> seqA_Track0;
+	vector<vector<string>> seqB_Track0;
+	vector<vector<string>> seqA_Track1;
+	vector<vector<string>> seqB_Track1;
+
 	for(int i=0; i<3; i++) {
-		cout << "TrackNumber: " << i << endl;
+		//cout << "TrackNumber: " << i << endl;
 		for(int j=0; j < midifile[i].size(); j++) {
 			
 			if (midifile[i][j].isNoteOn()) {
@@ -126,6 +157,7 @@ int main() {
 
 		}
 
+		
 		cout << "For fragment A:" << endl;
 
 		for (int i=0; i < sequencesA.size(); i++) {
@@ -143,6 +175,24 @@ int main() {
 			}
 			cout << endl;
 		}
+		
+		
+		if(i==0) {
+			seqA_Track0 = sequencesA;
+			seqB_Track0 = sequencesB;
+		}
+		
+		/*
+		if(i==1) {
+	                seqA_Track1 = sequencesA;
+                        seqB_Track1 = sequencesB;
+		}							                }
+		*/
+
+		if(i==1) {
+			seqA_Track1 = sequencesA;
+			seqB_Track1 = sequencesB;
+		}
 
 		initialA.assign(1, "R");
 		sequencesA.assign(1, initialA);
@@ -152,5 +202,8 @@ int main() {
 
 		cout << endl;
 	}
+	cout << setw(40) << "type" << setw(40) << "First appearence" << setw(40) << "Second appearnece" << endl;
+	//cout << setw(40) << "A right" << setw(40) << VectorToString(seqA_Track0[0]) << setw(40) << VectorToString(seqA_Track0[1] << endl;
+	
 	return 0;
 }
