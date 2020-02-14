@@ -140,6 +140,15 @@ int main() {
 	vector<vector<string>> seqA_Track2;
 	vector<vector<string>> seqB_Track2;
 
+	vector<string> empty_vector = {};
+
+	sequencesA.push_back(empty_vector);
+	sequencesA.push_back(empty_vector);
+
+	sequencesB.push_back(empty_vector);
+	sequencesB.push_back(empty_vector);
+
+
 	for(int i=0; i<3; i++) {
 		//cout << "TrackNumber: " << i << endl;
 		for(int j=0; j < midifile[i].size(); j++) {
@@ -162,7 +171,9 @@ int main() {
 							sequencesA[NumberOfRepeats].push_back(pitchname);
 							IsAdded = 1;
 						}
-						if (NumberOfRepeats >= sequencesA.size()) sequencesA.resize(NumberOfRepeats + 1);
+						if (NumberOfRepeats >= sequencesA.size()) { //sequencesA.resize(NumberOfRepeats + 1); sequencesA[NumberOfRepeats + 1] = {}; }
+							sequencesA.push_back(empty_vector);
+						}
 					}
 				}
 
@@ -178,7 +189,9 @@ int main() {
 							sequencesB[NumberOfRepeats].push_back(pitchname);
 							IsAdded = 1;
 						}
-						if (NumberOfRepeats >= sequencesB.size()) sequencesB.resize(NumberOfRepeats + 1);
+						if (NumberOfRepeats >= sequencesB.size()) { //sequencesB.resize(NumberOfRepeats + 1); sequencesB[NumberOfRepeats + 1] = {}; }
+							sequencesB.push_back(empty_vector);
+						}
 					}
 				}
 			
@@ -221,9 +234,17 @@ int main() {
 		
 		initialB.assign(1, "R");
 		sequencesB.assign(1, initialB);
+		
+        	sequencesA.push_back(empty_vector);
+	        sequencesA.push_back(empty_vector);
+
+		sequencesB.push_back(empty_vector);
+		sequencesB.push_back(empty_vector);
+
 
 		cout << endl;
 	}
+	
 	cout << left << setw(30) << "type" << setw(50) << "First appearence" << setw(40) << "Second appearence" << setw(30) << "Third appearence" << endl;
 	cout << endl;
 	cout << left << setw(30) << "A right" << setw(50) << VectorToString(seqA_Track1[0]) << setw(40) << VectorToString(seqA_Track1[1]) << setw(30) << VectorToString(seqA_Track1[2]) << endl;
