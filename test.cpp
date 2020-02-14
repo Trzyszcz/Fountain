@@ -56,14 +56,12 @@ vector<string> vecdifference(vector<string> vector1, vector<string> vector2) {
 }
 
 void Display_Intersection(vector<vector<string>> vector1, vector<vector<string>> vector2, string title) {
-	        string FirstStr = VectorToString(vecintersection(vector1[0], vector2[0]));
-		string SecondStr = VectorToString(vecintersection(vector1[1], vector2[1]));
-		string ThirdStr = VectorToString(vecintersection(vector1[2], vector2[2]));
+	string FirstStr = VectorToString(vecintersection(vector1[0], vector2[0]));
+	string SecondStr = VectorToString(vecintersection(vector1[1], vector2[1]));
+	string ThirdStr = VectorToString(vecintersection(vector1[2], vector2[2]));
 
-		cout << left << setw(30) << title << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
-		cout << endl;
-
-		//return null;
+	cout << left << setw(30) << title << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
+	cout << endl;
 }
 
 void Display_Difference(vector<vector<string>> vector1, vector<vector<string>> vector2, string title) {
@@ -72,6 +70,16 @@ void Display_Difference(vector<vector<string>> vector1, vector<vector<string>> v
 	string ThirdStr = VectorToString(vecdifference(vector1[2], vector2[2]));
 		 
 	cout << left << setw(30) << title << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
+	cout << endl;
+}
+
+void Great_Displayer(vector<vector<string>> vector1, vector<vector<string>> vector2, string vector1_title, string vector2_title) {
+	string intersection = vector1_title + " " + vector2_title + " intersection";
+	Display_Intersection(vector1, vector2, intersection);
+	string difference1 = vector1_title + " - " + vector2_title;
+	Display_Difference(vector1, vector2, difference1);
+	string difference2 = vector2_title + " - " + vector1_title;
+	Display_Difference(vector2, vector1, difference2);
 	cout << endl;
 }
 
@@ -225,69 +233,19 @@ int main() {
 	cout << left << setw(30) << "B right" << setw(50) << VectorToString(seqB_Track1[0]) << setw(40) << VectorToString(seqB_Track1[1]) << setw(30) << VectorToString(seqB_Track1[2]) << endl;
 	cout << endl;
 	cout << left << setw(30) << "B left" << setw(50) << VectorToString(seqB_Track2[0]) << setw(40) << VectorToString(seqB_Track2[1]) << setw(30) << VectorToString(seqB_Track2[2]) << endl;
-	cout << endl;
+	cout << endl << endl;
 
-	string FirstStr, SecondStr, ThirdStr;
+	Great_Displayer(seqA_Track1, seqB_Track1, "AR", "BR");
 
-	//AR BR intersection
-	
-	FirstStr = VectorToString(vecintersection(seqA_Track1[0], seqB_Track1[0]));
-	SecondStr = VectorToString(vecintersection(seqA_Track1[1], seqB_Track1[1]));
-	ThirdStr = VectorToString(vecintersection(seqA_Track1[2], seqB_Track1[2]));
+	Great_Displayer(seqA_Track2, seqB_Track2, "AL", "BL");
 
-	cout << left << setw(30) << "AR BR intersection" << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
-	cout << endl;
+	Great_Displayer(seqA_Track1, seqA_Track2, "AR", "AL");
 
-	//function test
-	
-	Display_Intersection(seqA_Track1, seqB_Track1, "AR BR intersection");
-	
-	//AR - BR
-        FirstStr = VectorToString(vecdifference(seqA_Track1[0], seqB_Track1[0]));
-        SecondStr = VectorToString(vecdifference(seqA_Track1[1], seqB_Track1[1]));
-        ThirdStr = VectorToString(vecdifference(seqA_Track1[2], seqB_Track1[2]));
- 
-        cout << left << setw(30) << "AR - BR" << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
-        cout << endl;
+	Great_Displayer(seqB_Track1, seqB_Track2, "BR", "BL");
 
-	//function test
-	Display_Difference(seqA_Track1, seqB_Track1, "AR - BR");
+	Great_Displayer(seqA_Track1, seqB_Track2, "AR", "BL");
 
-	/*
-
-        //BR - AR
-	FirstStr = VectorToString(vecdifference(seqB_Track1[0], seqA_Track1[0]));
-	SecondStr = VectorToString(vecdifference(seqB_Track1[1], seqA_Track1[1]));
-	ThirdStr = VectorToString(vecdifference(seqB_Track1[2], seqA_Track1[2]));
-
-	cout << left << setw(30) << "BR - AR" << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
-	cout << endl;
-
-	//AL BL intersection
-	
-	FirstStr = VectorToString(vecintersection(seqA_Track2[0], seqB_Track2[0]));
-	SecondStr = VectorToString(vecintersection(seqA_Track2[1], seqB_Track2[1]));
-	ThirdStr = VectorToString(vecintersection(seqA_Track2[2], seqB_Track2[2]));
-
-	cout << left << setw(30) << "AL BL intersection" << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
-	cout << endl;
-	
-	//AL - BL
-        FirstStr = VectorToString(vecdifference(seqA_Track2[0], seqB_Track2[0]));
-        SecondStr = VectorToString(vecdifference(seqA_Track2[1], seqB_Track2[1]));
-        ThirdStr = VectorToString(vecdifference(seqA_Track2[2], seqB_Track2[2]));
- 
-        cout << left << setw(30) << "AL - BL" << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
-        cout << endl;
-
-        //BL - AL
-	FirstStr = VectorToString(vecdifference(seqB_Track2[0], seqA_Track2[0]));
-	SecondStr = VectorToString(vecdifference(seqB_Track2[1], seqA_Track2[1]));
-	ThirdStr = VectorToString(vecdifference(seqB_Track2[2], seqA_Track2[2]));
-
-	cout << left << setw(30) << "BL - AL" << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
-	cout << endl;
-	*/
+	Great_Displayer(seqA_Track2, seqB_Track1, "AL", "BR");
 
 	return 0;
 }
