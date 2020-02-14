@@ -55,6 +55,27 @@ vector<string> vecdifference(vector<string> vector1, vector<string> vector2) {
 	return answer;
 }
 
+void Display_Intersection(vector<vector<string>> vector1, vector<vector<string>> vector2, string title) {
+	        string FirstStr = VectorToString(vecintersection(vector1[0], vector2[0]));
+		string SecondStr = VectorToString(vecintersection(vector1[1], vector2[1]));
+		string ThirdStr = VectorToString(vecintersection(vector1[2], vector2[2]));
+
+		cout << left << setw(30) << title << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
+		cout << endl;
+
+		//return null;
+}
+
+void Display_Difference(vector<vector<string>> vector1, vector<vector<string>> vector2, string title) {
+	string FirstStr = VectorToString(vecdifference(vector1[0], vector2[0]));
+        string SecondStr = VectorToString(vecdifference(vector1[1], vector2[1]));
+	string ThirdStr = VectorToString(vecdifference(vector1[2], vector2[2]));
+		 
+	cout << left << setw(30) << title << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
+	cout << endl;
+}
+
+
 int main() {
 	MidiFile midifile;
 	midifile.read("Ravel/Ravel__Jeux_deau.mid");
@@ -216,6 +237,10 @@ int main() {
 
 	cout << left << setw(30) << "AR BR intersection" << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
 	cout << endl;
+
+	//function test
+	
+	Display_Intersection(seqA_Track1, seqB_Track1, "AR BR intersection");
 	
 	//AR - BR
         FirstStr = VectorToString(vecdifference(seqA_Track1[0], seqB_Track1[0]));
@@ -224,6 +249,11 @@ int main() {
  
         cout << left << setw(30) << "AR - BR" << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
         cout << endl;
+
+	//function test
+	Display_Difference(seqA_Track1, seqB_Track1, "AR - BR");
+
+	/*
 
         //BR - AR
 	FirstStr = VectorToString(vecdifference(seqB_Track1[0], seqA_Track1[0]));
@@ -257,7 +287,7 @@ int main() {
 
 	cout << left << setw(30) << "BL - AL" << setw(50) << FirstStr << setw(40) << SecondStr << setw(30) << ThirdStr << endl;
 	cout << endl;
-
+	*/
 
 	return 0;
 }
